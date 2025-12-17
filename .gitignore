@@ -1,0 +1,46 @@
+*.iml
+.gradle
+/local.properties
+.idea/
+.DS_Store
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+*.tlog
+unity/SensorDataReceiver/Logs/
+unity/SensorDataReceiver/.vs/
+unity/SensorDataReceiver/Temp/
+.vs/
+.vscode/
+x64
+packages
+
+# Xcode user-specific files
+xcuserdata/
+*.xcuserdatad
+
+# Build output directories and files
+build/**/lib/
+build/**/Release/
+build/**/Debug/
+build/**/*.bundle/
+build/**/obj/
+build/**/libs/
+*.so
+*.dll
+*.dylib
+*.lib
+*.exp
+*.pdb
+*.ilk
+
+# Android NDK build outputs
+obj/
+libs/
+*.a
+*.o
+
+# iOS build outputs  
+build/iOS/build/
+*.xcarchive

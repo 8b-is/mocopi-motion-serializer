@@ -1,0 +1,426 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04B4445A2A42E138003294DF /* enums.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B444502A42DF1E003294DF /* enums.cpp */; };
+		04B4445C2A42E176003294DF /* const.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B444402A42DF1E003294DF /* const.hpp */; };
+		04B4445D2A42E17B003294DF /* const.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B444472A42DF1E003294DF /* const.cpp */; };
+		04E560482A440D9C00E37012 /* box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B4444E2A42DF1E003294DF /* box.cpp */; };
+		04E5604A2A440DA200E37012 /* converted_data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B4444B2A42DF1E003294DF /* converted_data.cpp */; };
+		04E5604B2A440DA700E37012 /* logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B444442A42DF1E003294DF /* logger.cpp */; };
+		04E5604C2A440DAA00E37012 /* mocopi_motion_format_api.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B444482A42DF1E003294DF /* mocopi_motion_format_api.cpp */; };
+		04E5604D2A440DAD00E37012 /* mocopi_motion_format_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B4443F2A42DF1E003294DF /* mocopi_motion_format_manager.cpp */; };
+		04E5604E2A440DAF00E37012 /* mocopi_motion_format_utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B4444C2A42DF1E003294DF /* mocopi_motion_format_utility.cpp */; };
+		04E5604F2A440DB200E37012 /* mocopi_motion_format.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04B4444D2A42DF1E003294DF /* mocopi_motion_format.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		04EB9A9627D9893E00785D51 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		04B4443F2A42DF1E003294DF /* mocopi_motion_format_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mocopi_motion_format_manager.cpp; sourceTree = "<group>"; };
+		04B444402A42DF1E003294DF /* const.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = const.hpp; sourceTree = "<group>"; };
+		04B444412A42DF1E003294DF /* mocopi_motion_format_utility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mocopi_motion_format_utility.hpp; sourceTree = "<group>"; };
+		04B444422A42DF1E003294DF /* enums.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = enums.hpp; sourceTree = "<group>"; };
+		04B444432A42DF1E003294DF /* box.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = box.hpp; sourceTree = "<group>"; };
+		04B444442A42DF1E003294DF /* logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = logger.cpp; sourceTree = "<group>"; };
+		04B444452A42DF1E003294DF /* mocopi_motion_format_api.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mocopi_motion_format_api.hpp; sourceTree = "<group>"; };
+		04B444462A42DF1E003294DF /* converted_data.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = converted_data.hpp; sourceTree = "<group>"; };
+		04B444472A42DF1E003294DF /* const.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = const.cpp; sourceTree = "<group>"; };
+		04B444482A42DF1E003294DF /* mocopi_motion_format_api.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mocopi_motion_format_api.cpp; sourceTree = "<group>"; };
+		04B444492A42DF1E003294DF /* mocopi_motion_format_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mocopi_motion_format_manager.hpp; sourceTree = "<group>"; };
+		04B4444A2A42DF1E003294DF /* mocopi_motion_format.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mocopi_motion_format.hpp; sourceTree = "<group>"; };
+		04B4444B2A42DF1E003294DF /* converted_data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = converted_data.cpp; sourceTree = "<group>"; };
+		04B4444C2A42DF1E003294DF /* mocopi_motion_format_utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mocopi_motion_format_utility.cpp; sourceTree = "<group>"; };
+		04B4444D2A42DF1E003294DF /* mocopi_motion_format.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mocopi_motion_format.cpp; sourceTree = "<group>"; };
+		04B4444E2A42DF1E003294DF /* box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = box.cpp; sourceTree = "<group>"; };
+		04B4444F2A42DF1E003294DF /* logger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = logger.hpp; sourceTree = "<group>"; };
+		04B444502A42DF1E003294DF /* enums.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = enums.cpp; sourceTree = "<group>"; };
+		EB0F5B002828DB0B001F2B8D /* libmocopi_motion_serializer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmocopi_motion_serializer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB47816B283381D500F8E341 /* Application_arm64-v8a_debug.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Application_arm64-v8a_debug.mk"; sourceTree = "<group>"; };
+		EB47816C283381D500F8E341 /* Android_arm64-v8a.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Android_arm64-v8a.mk"; sourceTree = "<group>"; };
+		EB47816D283381D500F8E341 /* Application_arm64-v8a_release.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Application_arm64-v8a_release.mk"; sourceTree = "<group>"; };
+		EB47816F283381D500F8E341 /* Application_x86_64_debug.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Application_x86_64_debug.mk; sourceTree = "<group>"; };
+		EB478170283381D500F8E341 /* Android_x86_64.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Android_x86_64.mk; sourceTree = "<group>"; };
+		EB478171283381D500F8E341 /* Application_x86_64_release.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Application_x86_64_release.mk; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		04EB9A9527D9893E00785D51 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04EB9A9927D9893E00785D51 /* mocopi_motion_serializer */ = {
+			isa = PBXGroup;
+			children = (
+				EB478169283381D500F8E341 /* jni */,
+				04EB9AA227D98AA400785D51 /* main */,
+			);
+			name = mocopi_motion_serializer;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		04EB9AA227D98AA400785D51 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				04B4444E2A42DF1E003294DF /* box.cpp */,
+				04B444432A42DF1E003294DF /* box.hpp */,
+				04B444472A42DF1E003294DF /* const.cpp */,
+				04B444402A42DF1E003294DF /* const.hpp */,
+				04B4444B2A42DF1E003294DF /* converted_data.cpp */,
+				04B444462A42DF1E003294DF /* converted_data.hpp */,
+				04B444502A42DF1E003294DF /* enums.cpp */,
+				04B444422A42DF1E003294DF /* enums.hpp */,
+				04B444442A42DF1E003294DF /* logger.cpp */,
+				04B4444F2A42DF1E003294DF /* logger.hpp */,
+				04B444482A42DF1E003294DF /* mocopi_motion_format_api.cpp */,
+				04B444452A42DF1E003294DF /* mocopi_motion_format_api.hpp */,
+				04B4443F2A42DF1E003294DF /* mocopi_motion_format_manager.cpp */,
+				04B444492A42DF1E003294DF /* mocopi_motion_format_manager.hpp */,
+				04B4444C2A42DF1E003294DF /* mocopi_motion_format_utility.cpp */,
+				04B444412A42DF1E003294DF /* mocopi_motion_format_utility.hpp */,
+				04B4444D2A42DF1E003294DF /* mocopi_motion_format.cpp */,
+				04B4444A2A42DF1E003294DF /* mocopi_motion_format.hpp */,
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
+		04FC2AE6278E97760004CA6A = {
+			isa = PBXGroup;
+			children = (
+				04EB9A9927D9893E00785D51 /* mocopi_motion_serializer */,
+				EB0F5B002828DB0B001F2B8D /* libmocopi_motion_serializer.a */,
+			);
+			sourceTree = "<group>";
+		};
+		EB478169283381D500F8E341 /* jni */ = {
+			isa = PBXGroup;
+			children = (
+				EB47816A283381D500F8E341 /* arm64-v8a */,
+				EB47816E283381D500F8E341 /* x86_64 */,
+			);
+			path = jni;
+			sourceTree = "<group>";
+		};
+		EB47816A283381D500F8E341 /* arm64-v8a */ = {
+			isa = PBXGroup;
+			children = (
+				EB47816C283381D500F8E341 /* Android_arm64-v8a.mk */,
+				EB47816B283381D500F8E341 /* Application_arm64-v8a_debug.mk */,
+				EB47816D283381D500F8E341 /* Application_arm64-v8a_release.mk */,
+			);
+			path = "arm64-v8a";
+			sourceTree = "<group>";
+		};
+		EB47816E283381D500F8E341 /* x86_64 */ = {
+			isa = PBXGroup;
+			children = (
+				EB478170283381D500F8E341 /* Android_x86_64.mk */,
+				EB47816F283381D500F8E341 /* Application_x86_64_debug.mk */,
+				EB478171283381D500F8E341 /* Application_x86_64_release.mk */,
+			);
+			path = x86_64;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		04EB9A9727D9893E00785D51 /* mocopi_motion_serializer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04EB9A9E27D9893E00785D51 /* Build configuration list for PBXNativeTarget "mocopi_motion_serializer" */;
+			buildPhases = (
+				04EB9A9427D9893E00785D51 /* Sources */,
+				04EB9A9527D9893E00785D51 /* Frameworks */,
+				04EB9A9627D9893E00785D51 /* CopyFiles */,
+				04BF1F3B27DF29F9001376A9 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = mocopi_motion_serializer;
+			productName = mocopi_motion_serializer;
+			productReference = EB0F5B002828DB0B001F2B8D /* libmocopi_motion_serializer.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04FC2AE7278E97760004CA6A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					04EB9A9727D9893E00785D51 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 04FC2AEA278E97760004CA6A /* Build configuration list for PBXProject "mocopi_motion_serializer" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 04FC2AE6278E97760004CA6A;
+			productRefGroup = 04FC2AE6278E97760004CA6A;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				04EB9A9727D9893E00785D51 /* mocopi_motion_serializer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		04BF1F3B27DF29F9001376A9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/mocopi_motion_serializer/lib/ios/lib$(PRODUCT_NAME).a",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# iOSの成果物を移動\nrm -rf \"$SRCROOT/mocopi_motion_serializer/lib/ios\"\nmkdir -p \"$SRCROOT/mocopi_motion_serializer/lib/ios\"\n\n# ビルド成果物をコピー\nif [ -f \"${BUILT_PRODUCTS_DIR}/lib${PRODUCT_NAME}.a\" ]; then\n  cp \"${BUILT_PRODUCTS_DIR}/lib${PRODUCT_NAME}.a\" \"$SRCROOT/mocopi_motion_serializer/lib/ios/\"\n  echo \"Copied lib${PRODUCT_NAME}.a to $SRCROOT/mocopi_motion_serializer/lib/ios/\"\n  ls -la \"$SRCROOT/mocopi_motion_serializer/lib/ios/\"\nelse\n  echo \"Error: ${BUILT_PRODUCTS_DIR}/lib${PRODUCT_NAME}.a not found\"\n  echo \"Searching for .a files in ${BUILT_PRODUCTS_DIR}:\"\n  ls -la \"${BUILT_PRODUCTS_DIR}\"/*.a 2>/dev/null || echo \"No .a files found\"\nfi\n\n# xcodebuildでの実行時はAndroidBuildは行わない\nif [ \"${BUILD_MOCOPI_LIBRARY_XCODEBUILD}\" != \"true\" ]; then\n  # Androidビルドはスキップ(ANDROID_NDK_ROOTが設定されている場合のみ実行)\n  if [ -n \"${ANDROID_NDK_ROOT}\" ] && [ -f \"$SRCROOT/../Android/build_mmf.sh\" ]; then\n    if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n      $SRCROOT/../Android/build_mmf.sh -r $ANDROID_NDK_ROOT\n    else\n      $SRCROOT/../Android/build_mmf.sh -d $ANDROID_NDK_ROOT\n    fi\n  fi\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04EB9A9427D9893E00785D51 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04B4445D2A42E17B003294DF /* const.cpp in Sources */,
+				04E560482A440D9C00E37012 /* box.cpp in Sources */,
+				04B4445C2A42E176003294DF /* const.hpp in Sources */,
+				04E5604E2A440DAF00E37012 /* mocopi_motion_format_utility.cpp in Sources */,
+				04E5604B2A440DA700E37012 /* logger.cpp in Sources */,
+				04E5604A2A440DA200E37012 /* converted_data.cpp in Sources */,
+				04E5604C2A440DAA00E37012 /* mocopi_motion_format_api.cpp in Sources */,
+				04B4445A2A42E138003294DF /* enums.cpp in Sources */,
+				04E5604D2A440DAD00E37012 /* mocopi_motion_format_manager.cpp in Sources */,
+				04E5604F2A440DB200E37012 /* mocopi_motion_format.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		04EB9A9F27D9893E00785D51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLY_RULES_IN_COPY_HEADERS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_BITCODE = NO;
+				HEADER_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "-fembed-bitcode";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SYSTEM_HEADER_SEARCH_PATHS = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		04EB9AA027D9893E00785D51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLY_RULES_IN_COPY_HEADERS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_BITCODE = NO;
+				HEADER_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "-fembed-bitcode";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SYSTEM_HEADER_SEARCH_PATHS = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Release;
+		};
+		04FC2AF6278E97760004CA6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /Applications/Unity/Hub/Editor/6000.0.60f1/PlaybackEngines/AndroidPlayer/NDK/sysroot/usr/include;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LIBRARY_SEARCH_PATHS = /Applications/Unity/Hub/Editor/6000.0.60f1/PlaybackEngines/AndroidPlayer/OpenJDK/lib;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		04FC2AF7278E97760004CA6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /Applications/Unity/Hub/Editor/6000.0.60f1/PlaybackEngines/AndroidPlayer/NDK/sysroot/usr/include;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LIBRARY_SEARCH_PATHS = /Applications/Unity/Hub/Editor/6000.0.60f1/PlaybackEngines/AndroidPlayer/OpenJDK/lib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04EB9A9E27D9893E00785D51 /* Build configuration list for PBXNativeTarget "mocopi_motion_serializer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04EB9A9F27D9893E00785D51 /* Debug */,
+				04EB9AA027D9893E00785D51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04FC2AEA278E97760004CA6A /* Build configuration list for PBXProject "mocopi_motion_serializer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04FC2AF6278E97760004CA6A /* Debug */,
+				04FC2AF7278E97760004CA6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 04FC2AE7278E97760004CA6A /* Project object */;
+}
