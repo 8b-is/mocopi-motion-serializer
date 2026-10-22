@@ -1,0 +1,8 @@
+[package]
+name = "mocopi-wupz-pq"
+version = "0.1.0"
+edition = "2021"
+description = "Zero-dependency, #![forbid(unsafe_code)] Rust serializer & wupz + p/q Smallest-Three S^3 quaternion + BFP compressor for Sony mocopi Motion Format (smf1)"
+license = "Apache-2.0"
+
+[dependencies]

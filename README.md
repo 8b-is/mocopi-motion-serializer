@@ -75,6 +75,7 @@ chmod +x build_mmf.sh && ./build_mmf.sh
 
 ```
 ├── main/                     # Core library source code
+├── rust/                     # Zero-dependency #![forbid(unsafe_code)] Rust serializer & mocopi-wupz-pq (4.45x smaller UDP/BLE frames)
 ├── build/                    # Platform-specific build configurations
 │   ├── Android/             # Android NDK build scripts and projects
 │   ├── iOS/                 # iOS Xcode projects
@@ -82,6 +83,14 @@ chmod +x build_mmf.sh && ./build_mmf.sh
 │   └── Windows/             # Visual Studio solutions
 └── jni/                     # Android JNI configurations
 ```
+
+### Rust `mocopi-wupz-pq` Crate (`rust/`)
+
+In addition to the C++ `smf1` library in `main/`, the `rust/` directory provides a zero-dependency, `#![forbid(unsafe_code)]` Rust crate (`mocopi-wupz-pq`) implementing both standard `smf1` Box serialization and the ultra-compact **`mwz1` (`wupz` + `p/q` Smallest-Three $S^3$ Quaternion + 12-bit Omni `BFP` Position)** wire format:
+- **Smallest-Three $S^3$ Quaternion `p/q` (`QuatSmallestThreePq`, `6 bytes` vs `16 bytes` FP32)**: Stores the 2-bit index of the largest quaternion component + three 15-bit signed rationals over $Q_{S^3} = 23170 \approx \lfloor 16383\sqrt{2}\rfloor$ + 1-bit parity, reconstructing the 4th component via exact integer `isqrt_u64` (`|<q, decoded>| >= 0.9999999`).
+- **4.45× Frame Compression for Unfragmented UDP & BLE**: Compresses a full 27-bone mocopi frame from **`1,605 bytes` (`smf1`)** down to **`361 bytes` (`mwz1`)**, including an 8-byte `wupz` bitplane XOR-fold integrity seal — fitting **4 full 27-bone mocopi frames inside a single `1,472-byte` UDP payload** without IPv4 fragmentation.
+- Run tests: `cargo test --manifest-path rust/Cargo.toml --release`
+- Related `8b-is` projects: [`8b-is/alexiai`](https://github.com/8b-is/alexiai), [`8b-is/Engram`](https://github.com/8b-is/Engram), and [`8b-is/deepsiper-enthea`](https://github.com/8b-is/deepsiper-enthea).
 
 ## Support
 
