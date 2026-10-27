@@ -10,10 +10,12 @@
 //!    $q_k = c_k / Q_{\text{S3}}$ where $Q_{\text{S3}} = 23170 \approx \lfloor 16383\sqrt{2}\rfloor$)
 //!    and reconstructs the 4th component via exact integer `isqrt_u64`:
 //!    $$c_m = \lfloor\sqrt{Q_{\text{S3}}^2 - c_a^2 - c_b^2 - c_c^2}\rfloor$$
-//!    Requires **zero floating-point `sqrtf`** on decode and achieves `< 0.003°` angular error.
+//!    Requires **zero floating-point `sqrtf`** on decode and achieves at most
+//!    `0.005°` angular error (measured worst case over the seeded axis/angle
+//!    sweep in `test_smallest_three_angular_error_bound`).
 //! 3. **Omni `BFP` Bone Translation Block & `wupz` Bitplane Frame Seal**:
-//!    Compresses a 27-bone mocopi `smf1` frame from **`1,572 bytes`** down to
-//!    **`358 bytes` (`4.39×` smaller)** — fitting 4 full 27-bone frames inside a
+//!    Compresses a 27-bone mocopi `smf1` frame from **`1,605 bytes`** down to
+//!    **`361 bytes` (`4.45×` smaller)** — fitting 4 full 27-bone frames inside a
 //!    single unfragmented `1,472-byte` UDP payload with an 8-byte `wupz` bitplane
 //!    integrity seal.
 //!
@@ -220,16 +222,13 @@ pub struct MocopiFrame {
 /// Compute a 64-bit `wupz` bitplane XOR-fold + SplitMix64 integrity seal over a byte slice.
 pub fn wupz_seal64(bytes: &[u8]) -> u64 {
     let mut acc: u64 = 0x9E37_79B9_7F4A_7C15 ^ (bytes.len() as u64);
-    let mut chunks = bytes.chunks_exact(8);
-    for (idx, chunk) in (&mut chunks).enumerate() {
-        let word = u64::from_le_bytes([
-            chunk[0], chunk[1], chunk[2], chunk[3], chunk[4], chunk[5], chunk[6], chunk[7],
-        ]);
+    let (words, rem) = bytes.as_chunks::<8>();
+    for (idx, chunk) in words.iter().enumerate() {
+        let word = u64::from_le_bytes(*chunk);
         acc ^= word.rotate_left(((idx * 13) & 63) as u32);
         acc = acc.wrapping_mul(0xBF58_476D_1CE4_E5B9);
         acc ^= acc >> 27;
     }
-    let rem = chunks.remainder();
     if !rem.is_empty() {
         let mut tail = [0u8; 8];
         tail[..rem.len()].copy_from_slice(rem);
@@ -242,17 +241,21 @@ pub fn wupz_seal64(bytes: &[u8]) -> u64 {
 impl MocopiFrame {
     /// Encode this frame into the compact `mocopi-wupz-pq` (`"mwz1"`) binary packet.
     ///
-    /// For a 27-bone mocopi skeleton:
-    /// - Header (`magic + sender + frame_number + timestamp + utc_time + timecode + bone_count`): 34 bytes
-    /// - Joint IDs (`1 byte` each): 27 bytes
-    /// - Smallest-Three `p/q` quaternions (`6 bytes` each): 162 bytes
-    /// - Omni `BFP` bone positions (`2 bytes` shared scale exponent + `27 * 3 * 1.5` or `i12` / `i16` mantissas):
-    ///   Here we use `i16` BFP mantissas (`162 bytes` for sub-0.05mm precision) or `i8` delta (`81 bytes`).
-    ///   With `i8` BFP local bone offsets (`1B` shared exp + `3 * 4B` root pos + `27 * 3 * 1B` residual = `94 bytes`)
-    ///   or `i16` BFP (`2B` exp + `27 * 3 * 2B` = `164 bytes`) + `8B` `wupz` seal!
+    /// Packet layout for `n` bones:
+    /// - Header (`magic 4 + sender_ip 8 + sender_port 2 + frame_number 4 +
+    ///   timestamp 4 + utc_time 8 + timecode 6 + bone_count 2`): `38` bytes
+    /// - Joint IDs (`1 byte` each): `n` bytes
+    /// - Smallest-Three `p/q` quaternions (`6 bytes` each): `6n` bytes
+    /// - Shared `f32` position scale: `4` bytes
+    /// - `i12` BFP position mantissas (`3 × 12 bits` per bone): `ceil(36n / 8)` bytes
+    /// - `wupz` bitplane integrity seal: `8` bytes
+    ///
+    /// A 27-bone frame is therefore `361` bytes.
     pub fn to_wupz_pq_bytes(&self) -> Vec<u8> {
         let n = self.bones.len();
-        let mut out = Vec::with_capacity(44 + n * 13);
+        assert!(n <= u16::MAX as usize, "bone count must fit in u16");
+        let pos_packed_bytes = (n * 3 * 12_usize).div_ceil(8);
+        let mut out = Vec::with_capacity(38 + n + n * 6 + 4 + pos_packed_bytes + 8);
         out.extend_from_slice(&MOCOPI_WUPZ_MAGIC);
         out.extend_from_slice(&self.sender_ip.to_le_bytes());
         out.extend_from_slice(&self.sender_port.to_le_bytes());
@@ -356,50 +359,45 @@ impl MocopiFrame {
         let timecode = [bytes[30], bytes[31], bytes[32], bytes[33], bytes[34], bytes[35]];
         let n = u16::from_le_bytes([bytes[36], bytes[37]]) as usize;
 
-        let pos_packed_bytes = (n * 3 * 12 + 7) / 8;
+        let pos_packed_bytes = (n * 3 * 12_usize).div_ceil(8);
         let expected_len = 38 + n + (n * 6) + 4 + pos_packed_bytes + 8;
         if bytes.len() != expected_len {
             return Err("Unexpected mocopi-wupz-pq packet length");
         }
 
-        let mut cursor = 38usize;
-        let mut joint_ids = Vec::with_capacity(n);
-        for _ in 0..n {
-            joint_ids.push(bytes[cursor] as u16);
-            cursor += 1;
-        }
-
-        let mut rotations = Vec::with_capacity(n);
-        for _ in 0..n {
-            let q_pq = QuatSmallestThreePq {
-                bytes: [
-                    bytes[cursor],
-                    bytes[cursor + 1],
-                    bytes[cursor + 2],
-                    bytes[cursor + 3],
-                    bytes[cursor + 4],
-                    bytes[cursor + 5],
-                ],
-            };
-            rotations.push(q_pq.to_xyzw()?);
-            cursor += 6;
-        }
+        let joint_ids_start = 38usize;
+        let quats_start = joint_ids_start + n;
+        let scale_start = quats_start + n * 6;
+        let pos_start = scale_start + 4;
 
         let max_abs = f32::from_le_bytes([
-            bytes[cursor],
-            bytes[cursor + 1],
-            bytes[cursor + 2],
-            bytes[cursor + 3],
+            bytes[scale_start],
+            bytes[scale_start + 1],
+            bytes[scale_start + 2],
+            bytes[scale_start + 3],
         ]);
-        cursor += 4;
         let scale = max_abs / 2047.0f32;
 
+        let mut cursor = pos_start;
         let mut bit_buf: u64 = 0;
         let mut bit_cnt: u32 = 0;
         let mut bones = Vec::with_capacity(n);
         for i in 0..n {
-            let mut pos = [0.0f32; 3];
-            for slot in &mut pos {
+            let q_off = quats_start + i * 6;
+            let rotation = QuatSmallestThreePq {
+                bytes: [
+                    bytes[q_off],
+                    bytes[q_off + 1],
+                    bytes[q_off + 2],
+                    bytes[q_off + 3],
+                    bytes[q_off + 4],
+                    bytes[q_off + 5],
+                ],
+            }
+            .to_xyzw()?;
+
+            let mut position = [0.0f32; 3];
+            for slot in &mut position {
                 while bit_cnt < 12 {
                     bit_buf |= (bytes[cursor] as u64) << bit_cnt;
                     bit_cnt += 8;
@@ -408,13 +406,13 @@ impl MocopiFrame {
                 let biased = (bit_buf & 0xFFF) as i32;
                 bit_buf >>= 12;
                 bit_cnt -= 12;
-                let q12 = biased - 2048;
-                *slot = (q12 as f32) * scale;
+                *slot = ((biased - 2048) as f32) * scale;
             }
+
             bones.push(MocopiBoneTransform {
-                joint_id: joint_ids[i],
-                rotation: rotations[i],
-                position: pos,
+                joint_id: bytes[joint_ids_start + i] as u16,
+                rotation,
+                position,
             });
         }
 
@@ -502,6 +500,21 @@ impl MocopiFrame {
 mod tests {
     use super::*;
 
+    const ANGULAR_ERROR_BOUND_DEG: f64 = 0.005;
+
+    fn quat_angle_deg(a: [f32; 4], b: [f32; 4]) -> f64 {
+        let dot: f64 = (0..4).map(|i| a[i] as f64 * b[i] as f64).sum();
+        let s = if dot < 0.0 { -1.0 } else { 1.0 };
+        let chord: f64 = (0..4)
+            .map(|i| {
+                let d = a[i] as f64 - s * b[i] as f64;
+                d * d
+            })
+            .sum::<f64>()
+            .sqrt();
+        2.0 * (chord / 2.0).asin().to_degrees()
+    }
+
     #[test]
     fn test_smallest_three_pq_unit_norm_and_angular_accuracy() {
         for i in 0..27 {
@@ -517,7 +530,6 @@ mod tests {
             assert_eq!(packed.bytes.len(), 6);
             let decoded = packed.to_xyzw().expect("valid parity");
 
-            // Check unit norm
             let norm = (decoded[0] * decoded[0]
                 + decoded[1] * decoded[1]
                 + decoded[2] * decoded[2]
@@ -525,14 +537,47 @@ mod tests {
                 .sqrt();
             assert!((norm - 1.0).abs() < 1e-4, "norm={norm}");
 
-            // Check dot product |<q, decoded>| > 0.9999999 (< 0.002 deg angular error)
-            let dot = (q[0] * decoded[0]
-                + q[1] * decoded[1]
-                + q[2] * decoded[2]
-                + q[3] * decoded[3])
-                .abs();
-            assert!(dot >= 0.999999, "dot={dot}");
+            let deg = quat_angle_deg(q, decoded);
+            assert!(deg <= ANGULAR_ERROR_BOUND_DEG, "angle_err={deg}");
         }
+    }
+
+    #[test]
+    fn test_smallest_three_angular_error_bound() {
+        let mut worst_deg = 0.0f64;
+        for axis_idx in 0..200 {
+            let i = axis_idx as f32;
+            let ax_raw = [
+                (0.31f32 * i).sin(),
+                (0.53f32 * i).cos(),
+                (0.71f32 * i).sin(),
+            ];
+            let ax_norm = (ax_raw[0] * ax_raw[0]
+                + ax_raw[1] * ax_raw[1]
+                + ax_raw[2] * ax_raw[2])
+                .sqrt();
+            let ax = [
+                ax_raw[0] / ax_norm,
+                ax_raw[1] / ax_norm,
+                ax_raw[2] / ax_norm,
+            ];
+            for step in 0..600 {
+                let angle = std::f32::consts::TAU * (step as f32) / 600.0;
+                let s = (angle * 0.5).sin();
+                let q = [ax[0] * s, ax[1] * s, ax[2] * s, (angle * 0.5).cos()];
+                let decoded = QuatSmallestThreePq::from_xyzw(q)
+                    .to_xyzw()
+                    .expect("valid parity");
+                let deg = quat_angle_deg(q, decoded);
+                if deg > worst_deg {
+                    worst_deg = deg;
+                }
+            }
+        }
+        assert!(
+            worst_deg <= ANGULAR_ERROR_BOUND_DEG,
+            "worst angular error {worst_deg} deg"
+        );
     }
 
     #[test]
